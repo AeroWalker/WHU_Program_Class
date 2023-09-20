@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f11da8fd-c6af-486d-80a4-4bb80fa6e1d5</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Emgu.CV</Import_RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EmguCVDebianBinaryDir>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\..\libs))</EmguCVDebianBinaryDir>
+    <EmguCVDebianDir>$(MSBuildThisFileDirectory)</EmguCVDebianDir>
+	<EmguCVDebianArmNativeRuntimeFolder>runtimes\linux-arm\native</EmguCVDebianArmNativeRuntimeFolder>
+	<EmguCVDebianArm64NativeRuntimeFolder>runtimes\linux-arm64\native</EmguCVDebianArm64NativeRuntimeFolder>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EmguCVDebianLinkTarget>Debian</EmguCVDebianLinkTarget>
+    <EmguCVDebianBuildArm Condition="'$(Platform)'=='AnyCPU' OR '$(Platform)'=='ARM'">True</EmguCVDebianBuildArm>
+    <EmguCVDebianNativeFileArm>$(EmguCVDebianBinaryDir)\$(EmguCVDebianArmNativeRuntimeFolder)\libcvextern.so</EmguCVDebianNativeFileArm>
+    <EmguCVDebianErrorMessage Condition="'$(EmguCVDebianBuildArm)'=='True' AND !Exists('$(EmguCVDebianNativeFileArm)')">This package do not contain necessary binary for $(EmguCVDebianLinkTarget). Debian arm is targeted, but file $(EmguCVDebianNativeFileArm) is missing. PInvoke may fail on Debian arm platform</EmguCVDebianErrorMessage>
+    <EmguCVDebianDeployMessage Condition="'$(EmguCVDebianBuildArm)'=='True' AND Exists('$(EmguCVDebianNativeFileArm)')">$(EmguCVDebianDeployMessage)Debian_arm </EmguCVDebianDeployMessage>
+	<EmguCVDebianBuildArm64 Condition="'$(Platform)'=='AnyCPU' OR '$(Platform)'=='ARM64'">True</EmguCVDebianBuildArm64>
+    <EmguCVDebianNativeFileArm64>$(EmguCVDebianBinaryDir)\$(EmguCVDebianArm64NativeRuntimeFolder)\libcvextern.so</EmguCVDebianNativeFileArm64>
+    <EmguCVDebianErrorMessage Condition="'$(EmguCVDebianBuildArm64)'=='True' AND !Exists('$(EmguCVDebianNativeFileArm64)')">This package do not contain necessary binary for $(EmguCVDebianLinkTarget). Debian arm64 is targeted, but file $(EmguCVDebianNativeFileArm64) is missing. PInvoke may fail on Debian arm64 platform</EmguCVDebianErrorMessage>
+    <EmguCVDebianDeployMessage Condition="'$(EmguCVDebianBuildArm64)'=='True' AND Exists('$(EmguCVDebianNativeFileArm64)')">$(EmguCVDebianDeployMessage)Debian_arm64 </EmguCVDebianDeployMessage>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(EmguCVDebianBuildArm)'=='True' AND Exists('$(EmguCVDebianNativeFileArm)')">
+    <Content Include="$(EmguCVDebianBinaryDir)\$(EmguCVDebianArmNativeRuntimeFolder)\*.so">
+      <Link>$(EmguCVDebianArmNativeRuntimeFolder)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup Condition="'$(EmguCVDebianBuildArm64)'=='True' AND Exists('$(EmguCVDebianNativeFileArm64)')">
+    <Content Include="$(EmguCVDebianBinaryDir)\$(EmguCVDebianArm64NativeRuntimeFolder)\*.so">
+      <Link>$(EmguCVDebianArm64NativeRuntimeFolder)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Target Name="EmguCVDebianPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <Warning Text="'$(EmguCVDebianErrorMessage)'" Condition="'$(EmguCVDebianErrorMessage)'!=''" />
+    <Message Text="Emgu CV Compiling with $(EmguCVDebianDeployMessage)binary" Condition="'$(EmguCVDebianDeployMessage)'!=''" Importance="High" />
+    <Message Text="Native binary is NOT deployed by the Emgu.CV.Runtime.Debian shared project." Condition="'$(EmguCVDebianDeployMessage)'==''" Importance="High" />
+  </Target>
+</Project>

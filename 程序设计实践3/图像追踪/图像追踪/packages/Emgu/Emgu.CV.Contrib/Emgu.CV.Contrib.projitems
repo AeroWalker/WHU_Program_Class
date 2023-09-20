@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>11e54a7e-778d-466c-a176-71e150976ac1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Emgu.CV.Contrib</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Alphamat\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dpm\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Saliency\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XFeatures2D\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Face\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Text\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Freetype\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BgSegm\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XImgproc\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XPhoto\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tracking\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plot\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aruco\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fuzzy\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Hfs\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LineDescriptor\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XObjdetect\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bioinspired\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DnnModern\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ImgHash\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PhaseUnwrapping\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Quality\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Stereo\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)SurfaceMatching\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)DnnSuperres\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)IntensityTransform\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Rapid\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Mcc\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Hdf\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)DepthAI\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)WechatQrcode\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Barcode\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)StructuredLight\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Rgbd\*.cs" />
+	<Compile Include="$(MSBuildThisFileDirectory)Reg\*.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+<Project>
+ <PropertyGroup>
+    <Version>4.7.0.5276</Version>
+    <Company>Emgu Corporation</Company>
+    <Authors>Emgu Corporation</Authors>
+    <Product>Emgu.CV</Product>
+    <Copyright>Emgu Corporation 2023</Copyright>
+ </PropertyGroup>
+</Project>

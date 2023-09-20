@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Robots>
+  <Robot>  
+    <ID>1001</ID> 
+    <Name>悟空</Name>
+    <IQ>220</IQ>
+   </Robot>
+  <Robot>  <ID>1002</ID>  <Name>八戒</Name>  <IQ>90</IQ>   </Robot>
+  <Robot>  <ID>1003</ID>  <Name>沙僧</Name>  <IQ>100</IQ>  </Robot>
+  <Robot>  <ID>1004</ID>  <Name>AlphaGo</Name>  <IQ>190</IQ>  </Robot>
+  <Robot>
+    <ID>1005</ID>     <Name>AlphaGo2</Name>     <IQ>200</IQ>
+   </Robot>
+</Robots>

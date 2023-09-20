@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Emgu.CV.Wpf</name>
+    </assembly>
+    <members>
+        <member name="T:Emgu.CV.BitmapSourceExtension">
+            <summary>
+            Extension methods to convert Emgu CV objects to / from BitmapSource
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.BitmapSourceExtension.DeleteObject(System.IntPtr)">
+            <summary>
+            Delete a GDI object
+            </summary>
+            <param name="o">The pointer to the GDI object to be deleted</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.BitmapSourceExtension.ToBitmapSource(Emgu.CV.IInputArray)">
+            <summary>
+            Convert an IImage to a WPF BitmapSource. The result can be used in the Set Property of Image.Source
+            </summary>
+            <param name="image">The Emgu CV Image</param>
+            <returns>The equivalent BitmapSource</returns>
+        </member>
+        <member name="M:Emgu.CV.BitmapSourceExtension.ToMat(System.Windows.Media.Imaging.BitmapSource,Emgu.CV.Mat)">
+            <summary>
+            Convert a BitmapSource into a Mat
+            </summary>
+            <param name="source">The Bitmap source</param>
+            <param name="image">The resulting Mat</param>
+            <exception cref="T:System.Exception">Will throw exception when we cannot handle the BitmapSource's PixelFormat</exception>
+        </member>
+        <member name="M:Emgu.CV.BitmapSourceExtension.ToMat(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Convert a BitmapSource into a Mat
+            </summary>
+            <param name="source">The Bitmap source</param>
+            <returns>The resulting Mat</returns>
+        </member>
+    </members>
+</doc>

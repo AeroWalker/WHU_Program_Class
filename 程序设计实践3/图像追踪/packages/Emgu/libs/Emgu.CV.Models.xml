@@ -1,0 +1,1045 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Emgu.CV.Models</name>
+    </assembly>
+    <members>
+        <member name="T:Emgu.CV.Models.CascadeFaceAndEyeDetector">
+            <summary>
+            Face and eye detector using HaarCascade.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CascadeFaceAndEyeDetector.Detect(Emgu.CV.IInputArray,System.Collections.Generic.List{System.Drawing.Rectangle},System.Collections.Generic.List{System.Drawing.Rectangle})">
+            <summary>
+            Detect faces and eyes region from the input image
+            </summary>
+            <param name="image">The input image.</param>
+            <param name="faces">The region of the faces.</param>
+            <param name="eyes">The region of the eyes.</param>
+        </member>
+        <member name="P:Emgu.CV.Models.CascadeFaceAndEyeDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CascadeFaceAndEyeDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the face and eye cascade classifier detection model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.CascadeFaceAndEyeDetector.RenderColorFace">
+            <summary>
+            Get or Set the color used in rendering face.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.CascadeFaceAndEyeDetector.RenderColorEye">
+            <summary>
+            Get or Set the color used in rendering eye.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CascadeFaceAndEyeDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no faces are detected, <paramref name="imageOut"/> will remain unchanged.
+            If faces/eyes are detected, we will draw the (rectangle) regions on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.CascadeFaceAndEyeDetector.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CascadeFaceAndEyeDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this face and eye detector
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.CombinedModel">
+            <summary>
+            Combined model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CombinedModel.#ctor(Emgu.CV.Models.IProcessAndRenderModel[])">
+            <summary>
+            Combine multiple IProcessAndRenderModel into a single model.
+            </summary>
+            <param name="models">The models to be combined.</param>
+        </member>
+        <member name="P:Emgu.CV.Models.CombinedModel.Models">
+            <summary>
+            Get the list of combined models.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.CombinedModel.DisposeChildren">
+            <summary>
+            If true, will dispose all the IProcessAndRenderModel passed in the constructor when this object is disposed. Otherwise it will not dispose the children when it is disposed.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CombinedModel.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.CombinedModel.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.CombinedModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the model
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">Initialization options</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.CombinedModel.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image. In a combined model, it should be different than <paramref name="imageIn"/> to avoid having the output of one model being passed as the input of the other model.
+            Note that if nothing is detected, the output image will remain unchanged.
+            It is a good idea to copy the pixels over from the <paramref name="imageIn"/> to <paramref name="imageOut"/> before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.CombinedModel.DisposeObject">
+            <summary>
+            Release the memory associated with this combined model.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.FacemarkDetector">
+            <summary>
+            Facial landmark detector
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FacemarkDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the facial landmark detector
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.FacemarkDetector.Detect(Emgu.CV.IInputArray,System.Drawing.Rectangle[])">
+            <summary>
+            Detect the facial landmarks from the face regions
+            </summary>
+            <param name="image">The image to detect facial landmarks from</param>
+            <param name="fullFaceRegions">The face regions to detect landmarks from</param>
+            <returns>Vector of facial landmarks</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.FacemarkDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this facemark detector.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.FreetypeNotoSansCJK">
+            <summary>
+            Freetype model using NotoSansCJK font
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FreetypeNotoSansCJK.#ctor(System.String)">
+            <summary>
+            Create a freetype model using NotoSansCJK font.
+            </summary>
+            <param name="modelFolderName">The subfolder name where the model will be saved to.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.FreetypeNotoSansCJK.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the freetype object
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.IProcessAndRenderModel">
+            <summary>
+            Process and render model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.IProcessAndRenderModel.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.IProcessAndRenderModel.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.IProcessAndRenderModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the model
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">Initialization options</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.IProcessAndRenderModel.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no object is detected, <paramref name="imageOut"/> will remain unchanged.
+            If objects are detected, we will draw the label and (rectangle) regions on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.PedestrianDetector">
+            <summary>
+            Pedestrian detector
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.PedestrianDetector.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.PedestrianDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this pedestrian detector
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.PedestrianDetector.Find(Emgu.CV.IInputArray)">
+            <summary>
+            Find the pedestrian in the image
+            </summary>
+            <param name="image">The image</param>
+            <returns>The region where pedestrians are detected</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.PedestrianDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.PedestrianDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Initialize the pedestrian detection model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.PedestrianDetector.RenderColor">
+            <summary>
+            Get or Set the color used in rendering the rectangle around the object.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.PedestrianDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no pedestrian is detected, <paramref name="imageOut"/> will remain unchanged.
+            If a pedestrian is detected, we will draw the (rectangle) region on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.TesseractModel">
+            <summary>
+            Tesseract Ocr model.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.TesseractModel.Model">
+            <summary>
+            Get the ocr model
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.TesseractModel.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.TesseractModel.#ctor(System.String,Emgu.CV.OCR.OcrEngineMode,System.String)">
+            <summary>
+            Create a tesseract model with the specific language and mode.
+            </summary>
+            <param name="lang">The language model</param>
+            <param name="mode">The ocr engine mode</param>
+            <param name="modelFolderName">The subfolder to store the tesseract model data. It is appended to the data download folder.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.TesseractModel.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.TesseractModel.DisposeObject">
+            <summary>
+            Release all the unmanaged memory associated to this tesseract OCR model.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.TesseractModel.RenderColor">
+            <summary>
+            Get or Set the color used in rendering.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.TesseractModel.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as imageIn, in which case we will render directly into the input image.
+            Note that if no text is detected, the output image will remain unchanged. 
+            If text are detected, we will render the text region on top of the existing output image.
+            If the output image is not the same object as the input image, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.TesseractModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Initialize the tesseract ocr model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.BarcodeDetectorModel">
+            <summary>
+            BarcodeDetector model
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.BarcodeDetectorModel.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.BarcodeDetectorModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the BarcodeDetector model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.BarcodeDetectorModel.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.BarcodeDetectorModel.DisposeObject">
+            <summary>
+            Release the memory associated with this WeChatQRCode detector.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.BarcodeDetectorModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the WeChatQRCode model
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">A string, not used right now.</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.BarcodeDetectorModel.RenderColor">
+            <summary>
+            Get or Set the color used in rendering.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.BarcodeDetectorModel.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no bar codes are detected, <paramref name="imageOut"/> will remain unchanged.
+            If bar codes are detected, we will draw the code and (rectangle) regions on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.DetectedObject">
+            <summary>
+            A detection result
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.DetectedObject.Region">
+            <summary>
+            The detected region
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.DetectedObject.Confident">
+            <summary>
+            The confident
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.DetectedObject.Label">
+            <summary>
+            The label
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.DetectedObject.ClassId">
+            <summary>
+            The class id
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.DetectedObject.Render(Emgu.CV.IInputOutputArray,Emgu.CV.Structure.MCvScalar,Emgu.CV.Freetype.Freetype2)">
+            <summary>
+            Draw the detected object on the image
+            </summary>
+            <param name="image">The image to draw on</param>
+            <param name="color">The color to draw the rectangle around the detected object</param>
+            <param name="freetype2">Optional freetype2 object, if provided, it will be used to draw the label. If null, will use CvInvoke.PutText instead.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.DetectedObject.GetRectangle(System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            Get a rectangle using the 4 fraction number of network output and size of the image
+            </summary>
+            <param name="left">A [0-1.0] value that indicates the left side of the rectangle. </param>
+            <param name="top">A [0-1.0] value that indicates the top side of the rectangle. </param>
+            <param name="right">A [0-1.0] value that indicates the right side of the rectangle. </param>
+            <param name="bottom">A [0-1.0] value that indicates the bottom side of the rectangle. </param>
+            <param name="width">The width of the image</param>
+            <param name="height">The height of the image</param>
+            <returns>A rectangle based on the image coordinate.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.DetectionModelExtension">
+            <summary>
+            Extension functions for Emgu.CV.Dnn.DetectionModel
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.DetectionModelExtension.Detect(Emgu.CV.Dnn.DetectionModel,Emgu.CV.IInputArray,System.Single,System.Single,System.String[])">
+            <summary>
+            Given the input frame, create input blob, run net and return result detections.
+            </summary>
+            <param name="model">The Dnn DetectionModel</param>
+            <param name="frame">The input image.</param>
+            <param name="confThreshold">A threshold used to filter boxes by confidences.</param>
+            <param name="nmsThreshold">A threshold used in non maximum suppression. The default value 0 means we will not perform non-maximum supression.</param>
+            <param name="labels">Optional labels mapping, if provided, it will use classId as lookup index to get the Label. If null, the Label field of the DetectedObject will be null.</param>
+            <returns>The array of detected objects</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.FaceAndLandmarkDetector">
+            <summary>
+            Face and facial landmark detector
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceAndLandmarkDetector.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceAndLandmarkDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this face and facial landmark detector
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.FaceAndLandmarkDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceAndLandmarkDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the facemark detector as well as the DNN face detector
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.FaceAndLandmarkDetector.RenderColorRectangle">
+            <summary>
+            Get or Set the color used in rendering the rectangle around the object.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.FaceAndLandmarkDetector.RenderColorLandmark">
+            <summary>
+            Get or Set the color used in rendering the rectangle around the object.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceAndLandmarkDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no faces are detected, <paramref name="imageOut"/> will remain unchanged.
+            If faces/landmarks are detected, we will draw the regions and markers on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.FaceDetector">
+            <summary>
+            Face detector using DNN
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the DNN face detector
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetector.Detect(Emgu.CV.IInputArray,System.Collections.Generic.List{Emgu.CV.Models.DetectedObject},System.Collections.Generic.List{Emgu.CV.Models.DetectedObject},System.Single,System.Single)">
+            <summary>
+            Detect faces on the image
+            </summary>
+            <param name="image">The image.</param>
+            <param name="fullFaceRegions">The faces where a full facial region is detected. These images can be send to facial landmark recognition for further processing.</param>
+            <param name="partialFaceRegions">The face region of which is close to the edge of the images. Because if may not contains all the facial landmarks, it is not recommended to send these regions to facial landmark detection.</param>
+            <param name="confidenceThreshold">The confident threshold for face detection</param>
+            <param name="nmsThreshold">The non maximum suppression threshold for face detection.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this face detector.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.FaceDetectorYNModel">
+            <summary>
+            Face detector using FaceDetectorYN
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.FaceDetectorYNModel.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the face detection model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.Detect(Emgu.CV.IInputArray,Emgu.CV.Mat)">
+            <summary>
+            Detect faces on the image
+            </summary>
+            <param name="image">The image.</param>
+            <param name="detectionResult">The detection result</param>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.Detect(Emgu.CV.IInputArray)">
+            <summary>
+            Detect faces on the image
+            </summary>
+            <param name="image">The image</param>
+            <returns>The array of FaceDetectorYNResult</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.ConvertMatToFaceDetectorYNResult(Emgu.CV.Mat)">
+            <summary>
+            Convert the raw result in Mat format into more readable result
+            </summary>
+            <param name="rawResult">The raw result in Mat format</param>
+            <returns>The array of FaceDetectorYNResult</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult">
+            <summary>
+            Results from FaceDetectorYN
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.Region">
+            <summary>
+            The facial region
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.RightEye">
+            <summary>
+            The right eye center            
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.LeftEye">
+            <summary>
+            The left eye center             
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.NoseTip">
+            <summary>
+            The nose tip
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.RightMouthCorner">
+            <summary>
+            The right mouth corner
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.FaceDetectorYNModel.FaceDetectorYNResult.LeftMouthCorner">
+            <summary>
+            The left mouth corner
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.DisposeObject">
+            <summary>
+            Release the memory associated with this face detector.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.Clear">
+            <summary>
+            Clear the model. 
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.FaceDetectorYNModel.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <inheritdoc />
+        </member>
+        <member name="T:Emgu.CV.Models.MaskedObject">
+            <summary>
+            A DetectedObject associated with a mask
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.MaskedObject._disposed">
+            <summary> Track whether Dispose has been called. </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.#ctor(System.Int32,System.String,System.Double,System.Drawing.Rectangle,Emgu.CV.Mat)">
+            <summary>
+            Create a new masked object
+            </summary>
+            <param name="classId">The class id</param>
+            <param name="label">The label</param>
+            <param name="confident">The confident</param>
+            <param name="region">The region.</param>
+            <param name="mask">The mask, we will make a copy of the mask and stored with the MaskedObject</param>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.Render(Emgu.CV.IInputOutputArray,Emgu.CV.Structure.MCvScalar,Emgu.CV.Structure.MCvScalar,Emgu.CV.Freetype.Freetype2)">
+            <summary>
+            Draw the detected object on the image
+            </summary>
+            <param name="image">The image to draw on</param>
+            <param name="color">The color used for drawing the region</param>
+            <param name="maskColor">The color used for drawing the mask</param>
+            <param name="freetype2">Optional freetype2 object, if provided, it will be used to draw the label. If null, will use CvInvoke.PutText instead.</param>
+        </member>
+        <member name="P:Emgu.CV.Models.MaskedObject.Mask">
+            <summary>
+            Get the Mask
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.Dispose">
+            <summary>
+            The dispose function that implements IDisposable interface
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.Dispose(System.Boolean)">
+            <summary> 
+            Dispose(bool disposing) executes in two distinct scenarios.
+            If disposing equals true, the method has been called directly
+            or indirectly by a user's code. Managed and unmanaged resources
+            can be disposed.
+            If disposing equals false, the method has been called by the
+            runtime from inside the finalizer and you should not reference
+            other objects. Only unmanaged resources can be disposed.
+            </summary>
+            <param name="disposing"> If disposing equals false, the method has been called by the runtime from inside the finalizer and you should not reference other objects. Only unmanaged resources can be disposed. </param>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.ReleaseManagedResources">
+            <summary>
+            Release the managed resources. This function will be called during the disposal of the current object.
+            override ride this function if you need to call the Dispose() function on any managed IDisposable object created by the current object
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.DisposeObject">
+            <summary>
+            Release the unmanaged resources
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskedObject.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.MaskRcnn">
+            <summary>
+            MaskRcnn model
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.MaskRcnn.ObjectsOfInterest">
+            <summary>
+            Get or Set the list of object of interest.
+            If null, all detected objects will be returned during the detection.
+            Otherwise, only those objects with a label included in the list will be returned.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.MaskRcnn.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the Mask Rcnn model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <param name="initOptions">A string, such as "OpenCV;CPU", in the format of "{backend};{option}"</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.MaskRcnn.RenderColorRectangle">
+            <summary>
+            Get or Set the color used in rendering the rectangle around the object.
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.MaskRcnn.RenderColorMask">
+            <summary>
+            Get the rendering colors for the mask. The size of the array equals to the size of labels.
+            You can change the colors for rendering masks by updating this array.
+            It will only contains value after the Init function is called.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.Emgu#CV#Models#IProcessAndRenderModel#ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">The output image, can be the same as imageIn, in which case we will render directly into the input image</param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray,System.Single,System.Single)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">The output image, can be the same as imageIn, in which case we will render directly into the input image</param>
+            <param name="matchScoreThreshold">A threshold used to filter boxes by score.</param>
+            <param name="nmsThreshold">A threshold used in non maximum suppression.</param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.Detect(Emgu.CV.IInputArray,System.Single,System.Single)">
+            <summary>
+            Perform detection on the input image and return the results
+            </summary>
+            <param name="m">The input image</param>
+            <param name="matchScoreThreshold">A threshold used to filter boxes by score.</param>
+            <param name="nmsThreshold">A threshold used in non maximum suppression.</param>
+            <returns>The detected objects</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.MaskRcnn.DisposeObject">
+            <summary>
+            Release the memory associated with this Mask Rcnn detector.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.SceneTextDetector">
+            <summary>
+            DNN Scene text detector
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.#ctor(System.String)">
+            <summary>
+            Create a new SceneTextDetector
+            </summary>
+            <param name="modelFolderName">The subfolder name where the model will be saved to.</param>
+        </member>
+        <member name="P:Emgu.CV.Models.SceneTextDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the vehicle detector, the license plate detector and OCR.
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">Initialization options. None supported at the moment, any value passed will be ignored.</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.Detect(Emgu.CV.IInputArray)">
+            <summary>
+            Detect scene text from the given image
+            </summary>
+            <param name="image">The image</param>
+            <returns>The detected scene text.</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.SceneTextDetector.RenderColor">
+            <summary>
+            Get or Set the color used in rendering.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.Render(Emgu.CV.IInputOutputArray,Emgu.CV.Models.DetectedObject[])">
+            <summary>
+            Draw the vehicles to the image.
+            </summary>
+            <param name="image">The image to be drawn to.</param>
+            <param name="sceneTexts">The scene texts.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no text is detected, <paramref name="imageOut"/> will remain unchanged.
+            If text is detected, we will draw the text and (rectangle) region on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.SceneTextDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this scene text detector.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.VehicleLicensePlateDetector">
+            <summary>
+            DNN Vehicle license plate detector using OpenVino
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.VehicleLicensePlateDetector.LicensePlate">
+            <summary>
+            License plate
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.LicensePlate.Region">
+            <summary>
+            The region of the license plate
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.LicensePlate.Text">
+            <summary>
+            The text on the license plate
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle">
+            <summary>
+            Vehicle
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle.Region">
+            <summary>
+            The vehicle region
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle.Color">
+            <summary>
+            The color of the vehicle
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle.Type">
+            <summary>
+            The vehicle type
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle.LicensePlate">
+            <summary>
+            The license plate. If null, there is no license plate detected.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle.ContainsPlate(Emgu.CV.Models.VehicleLicensePlateDetector.LicensePlate,System.Double)">
+            <summary>
+            If the license plate region is located within the vehicle region
+            </summary>
+            <param name="p">The license plate</param>
+            <param name="plateOverlapRatio">A license plate is overlapped with the vehicle if the specific ratio of the license plate area is overlapped.</param>
+            <returns>True if the license plate overlap with the vehicle.</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.VehicleLicensePlateDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the vehicle detector, the license plate detector and OCR.
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">Initialization options. A string in the format of "backend;target" that represent the DNN backend and target.</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no vehicle is detected, <paramref name="imageOut"/> will remain unchanged.
+            If vehicle / license plate are detected, we will draw the text and (rectangle) region on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.Detect(Emgu.CV.IInputArray)">
+            <summary>
+            Detect vehicle from the given image
+            </summary>
+            <param name="image">The image</param>
+            <returns>The detected vehicles.</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.VehicleLicensePlateDetector.RenderColor">
+            <summary>
+            Get or Set the color used in rendering.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.Render(Emgu.CV.IInputOutputArray,Emgu.CV.Models.VehicleLicensePlateDetector.Vehicle[])">
+            <summary>
+            Draw the vehicles to the image.
+            </summary>
+            <param name="image">The image to be drawn to.</param>
+            <param name="vehicles">The vehicles.</param>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.VehicleLicensePlateDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this vehicle license plate detector
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.WeChatQRCodeDetector">
+            <summary>
+            WeChatQRCodeDetector model
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.WeChatQRCodeDetector.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.WeChatQRCodeDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the WeChatQRCode model
+            </summary>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.WeChatQRCodeDetector.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.WeChatQRCodeDetector.DisposeObject">
+            <summary>
+            Release the memory associated with this WeChatQRCode detector.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.WeChatQRCodeDetector.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the WeChatQRCode model
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">A string, not used right now.</param>
+            <returns>Async task</returns>
+        </member>
+        <member name="P:Emgu.CV.Models.WeChatQRCodeDetector.RenderColor">
+            <summary>
+            Get or Set the color used in rendering.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.WeChatQRCodeDetector.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no qr codes are detected, <paramref name="imageOut"/> will remain unchanged.
+            If qr codes are detected, we will draw the code and (rectangle) regions on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+        <member name="T:Emgu.CV.Models.Yolo">
+            <summary>
+            Yolo model
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.Models.Yolo.YoloVersion">
+            <summary>
+            The Yolo model version
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.Yolo.YoloVersion.YoloV4">
+            <summary>
+            Yolo V4
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.Yolo.YoloVersion.YoloV4Tiny">
+            <summary>
+            Yolo V4 tiny
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.Yolo.YoloVersion.YoloV3">
+            <summary>
+            Yolo v3
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.Yolo.YoloVersion.YoloV3Spp">
+            <summary>
+            Yolo v3 spp
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.Models.Yolo.YoloVersion.YoloV3Tiny">
+            <summary>
+            Yolo v3 tiny
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.Models.Yolo.Initialized">
+            <summary>
+            Return true if the model is initialized
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.Init(Emgu.CV.Models.Yolo.YoloVersion,Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler)">
+            <summary>
+            Download and initialize the yolo model
+            </summary>
+            <param name="version">The model version</param>
+            <param name="onDownloadProgressChanged">Call back method during download</param>
+            <returns>Asyn task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.Detect(Emgu.CV.IInputArray,System.Double,System.Double)">
+            <summary>
+            Detect objects using Yolo model
+            </summary>
+            <param name="image">The input image</param>
+            <param name="confThreshold">The confident threshold. Only detection with confident larger than this will be returned.</param>
+            <param name="nmsThreshold">If positive, will perform non-maximum suppression using the threshold value. If less than or equals to 0, will not perform Non-maximum suppression.</param>
+            <returns>The detected objects</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.Clear">
+            <summary>
+            Clear and reset the model. Required Init function to be called again before calling ProcessAndRender.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.DisposeObject">
+            <summary>
+            Release the memory associated with this Yolo detector.
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.Init(Emgu.Util.FileDownloadManager.DownloadProgressChangedEventHandler,System.Object)">
+            <summary>
+            Download and initialize the yolo model
+            </summary>
+            <param name="onDownloadProgressChanged">Callback when download progress has been changed</param>
+            <param name="initOptions">A string, can be either "YoloV4", "YoloV4Tiny", "YoloV3", "YoloV3Spp", "YoloV3Tiny", specify the yolo model to use. Deafult to use "YoloV4". </param>
+            <returns>Async task</returns>
+        </member>
+        <member name="M:Emgu.CV.Models.Yolo.ProcessAndRender(Emgu.CV.IInputArray,Emgu.CV.IInputOutputArray)">
+            <summary>
+            Process the input image and render into the output image
+            </summary>
+            <param name="imageIn">The input image</param>
+            <param name="imageOut">
+            The output image, can be the same as <paramref name="imageIn"/>, in which case we will render directly into the input image.
+            Note that if no object is detected, <paramref name="imageOut"/> will remain unchanged.
+            If objects are detected, we will draw the label and (rectangle) regions on top of the existing pixels of <paramref name="imageOut"/>.
+            If the <paramref name="imageOut"/> is not the same object as <paramref name="imageIn"/>, it is a good idea to copy the pixels over from the input image before passing it to this function.
+            </param>
+            <returns>The messages that we want to display.</returns>
+        </member>
+    </members>
+</doc>
